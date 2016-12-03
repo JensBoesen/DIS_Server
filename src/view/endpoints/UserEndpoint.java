@@ -23,7 +23,7 @@ public class UserEndpoint {
      * @return En JSON String
      */
     @GET
-    @Consumes("applications/json")
+    //@Consumes("applications/json")
     @Path("/lecture/{code}")
     public Response getLectures(@PathParam("code") String code) {
         Gson gson = new Gson();
@@ -59,7 +59,7 @@ public class UserEndpoint {
     }
 
     @GET
-    @Consumes("applications/json")
+    //@Consumes("applications/json")
     @Path("/review/{lectureId}")
     public Response getReviews(@PathParam("lectureId") int lectureId) {
         Gson gson = new Gson();
@@ -73,6 +73,7 @@ public class UserEndpoint {
         }
     }
 
+
     @OPTIONS
     @Path("/login")
     public Response optionsLogin() {
@@ -83,8 +84,30 @@ public class UserEndpoint {
                 .build();
     }
 
+    @OPTIONS
+    @Path("/course/{userId}")
+    public Response getReviews() {
+        return Response
+                .status(200)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Headers", "Content-Type")
+                .build();
+
+    }
+
+    @OPTIONS
+    @Path("/lecture/{userId}")
+    public Response getLecture() {
+        return Response
+                .status(200)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Headers", "Content-Type")
+                .build();
+
+    }
+
     @POST
-    @Consumes("application/json")
+    //@Consumes("application/json")
     @Path("/login")
     public Response login(String data) {
 
