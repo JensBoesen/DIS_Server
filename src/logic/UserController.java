@@ -98,7 +98,7 @@ public class UserController {
 
                 lecture.setStartDate(rs.getTimestamp("start"));
                 lecture.setEndDate(rs.getTimestamp("end"));
-                //lecture.setId(rs.getInt("id"));
+                lecture.setId(rs.getInt("id"));
                 lecture.setType(rs.getString("type"));
                 lecture.setDescription(rs.getString("description"));
 
