@@ -85,8 +85,19 @@ public class UserEndpoint {
     }
 
     @OPTIONS
+    @Path("/review/{lectureId}")
+    public Response getReview() {
+        return Response
+                .status(200)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Headers", "Content-Type")
+                .build();
+
+    }
+
+    @OPTIONS
     @Path("/course/{userId}")
-    public Response getReviews() {
+    public Response getCourse() {
         return Response
                 .status(200)
                 .header("Access-Control-Allow-Origin", "*")
