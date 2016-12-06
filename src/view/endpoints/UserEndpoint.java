@@ -60,11 +60,26 @@ public class UserEndpoint {
 
     @GET
     //@Consumes("applications/json")
-    @Path("/review/{lectureId}")
+    @Path("/review/lecture/{lectureId}")
     public Response getReviews(@PathParam("lectureId") int lectureId) {
         Gson gson = new Gson();
         UserController userCtrl = new UserController();
         ArrayList<ReviewDTO> reviews = userCtrl.getReviews(lectureId);
+
+        if (!reviews.isEmpty()) {
+            return successResponse(200, reviews);
+        } else {
+            return errorResponse(404, "Failed. Couldn't get reviews.");
+        }
+    }
+
+    @GET
+    //@Consumes("applications/json")
+    @Path("/review/user/{userId}")
+    public Response getUserReviews(@PathParam("userId") int userId) {
+        Gson gson = new Gson();
+        UserController userCtrl = new UserController();
+        ArrayList<ReviewDTO> reviews = userCtrl.getUserReviews(userId);
 
         if (!reviews.isEmpty()) {
             return successResponse(200, reviews);
@@ -85,8 +100,19 @@ public class UserEndpoint {
     }
 
     @OPTIONS
-    @Path("/review/{lectureId}")
+    @Path("/review/lecture/{lectureId}")
     public Response getReview() {
+        return Response
+                .status(200)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Headers", "Content-Type")
+                .build();
+
+    }
+
+    @OPTIONS
+    @Path("/review/user/{userId}")
+    public Response getUserReview() {
         return Response
                 .status(200)
                 .header("Access-Control-Allow-Origin", "*")
