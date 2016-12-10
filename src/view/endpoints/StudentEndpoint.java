@@ -53,6 +53,7 @@ public class StudentEndpoint extends UserEndpoint {
                 .status(200)
                 .header("Access-Control-Allow-Origin", "*")
                 .header("Access-Control-Allow-Headers", "Content-Type")
+                .header("Access-Control-Allow-Methods","GET,PUT,POST,DELETE")
                 .build();
     }
 
@@ -65,7 +66,7 @@ public class StudentEndpoint extends UserEndpoint {
         ReviewDTO review = gson.fromJson(data, ReviewDTO.class);
         StudentController studentCtrl = new StudentController();
 
-        boolean isDeleted = studentCtrl.softDeleteReview(review.getUserId(), review.getId());
+        boolean isDeleted = studentCtrl.softDeleteReview(review.getId());
 
         if (isDeleted) {
             String toJson = gson.toJson(Digester.encrypt(gson.toJson(isDeleted)));
